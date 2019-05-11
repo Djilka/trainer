@@ -18,8 +18,8 @@ protected:
 	void help()
 	{
 		cout << "help:\n";
-		for (t_iter it = cmd_fun.begin(); it != cmd_fun.end(); ++it)
-			cout << "\t" << it->first << '\n';
+		for (auto it : cmd_fun)
+			cout << "\t" << it.first << '\n';
 	}
 
 	static bool is_exit;
