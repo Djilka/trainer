@@ -7,6 +7,8 @@ class t_command: public t_command_base {
 	void text()
 	{
 		cout << "text:\n";
+		t_text text;
+		text.run();
 	}
 
 	static

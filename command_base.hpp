@@ -15,7 +15,6 @@ protected:
 		is_exit = true;
 	}
 
-	static
 	void help()
 	{
 		cout << "help:\n";
@@ -24,12 +23,11 @@ protected:
 	}
 
 	static bool is_exit;
-	static t_map cmd_fun;
+	t_map cmd_fun;
 public:
 	t_command_base()
 	{
 		cmd_fun["exit"] = &this->exit;
-		cmd_fun["help"] = &this->help;
 	}
 
 	void run()
@@ -47,8 +45,8 @@ public:
 			else
 				help();
 		}
+		is_exit = false;
 	}
 };
 
 bool t_command_base::is_exit = false;
-t_command_base::t_map t_command_base::cmd_fun;
