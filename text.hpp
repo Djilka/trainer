@@ -1,7 +1,5 @@
-#include "types.hpp"
-#include "text.hpp"
 
-class t_command {
+class t_text {
 	typedef void (*t_fun)();
 public:
 	typedef map<t_string, t_fun> t_map;
@@ -9,11 +7,39 @@ private:
 	typedef pair<t_string, t_fun> t_pair;
 	typedef t_map::iterator t_iter;
 
-// main tasks
 	static
-	void text()
+	void view()
 	{
-		cout << "text:\n";
+		cout << "view:\n";
+
+	}
+
+	static
+	void add()
+	{
+		cout << "add:\n";
+
+	}
+
+	static
+	void merge()
+	{
+		cout << "merge:\n";
+
+	}
+
+	static
+	void remove()
+	{
+		cout << "remove:\n";
+
+	}
+
+	static
+	void train()
+	{
+		cout << "train:\n";
+
 	}
 
 	static
@@ -40,12 +66,16 @@ private:
 	static bool is_exit;
 	static t_map cmd_fun;
 public:
-	t_command()
+	t_text()
 	{
 		cmd_fun["exit"] = &this->exit;
-		cmd_fun["text"] = &this->text;
 		cmd_fun["setting"] = &this->setting;
 		cmd_fun["help"] = &this->help;
+		cmd_fun["view"] = &this->view;
+		cmd_fun["add"] = &this->add;
+		cmd_fun["merge"] = &this->merge;
+		cmd_fun["remove"] = &this->remove;
+		cmd_fun["train"] = &this->train;
 	}
 
 	void run()
@@ -64,7 +94,8 @@ public:
 				help();
 		}
 	}
+
 };
 
-bool t_command::is_exit = false;
-t_command::t_map t_command::cmd_fun;
+bool t_text::is_exit = false;
+t_text::t_map t_text::cmd_fun;
