@@ -10,7 +10,7 @@ struct t_raw {
 	char ptr[1024];
 };
 
-class t_convert {
+class t_convert_base {
 public:
 	template <typename t_type>
 	void write(t_raw &raw, t_type val)
@@ -64,7 +64,24 @@ public:
 	}
 };
 
-class t_convert_token : public t_convert {
+template <class t_data>
+class t_convert : public t_convert_base {
+public:
+	t_data convert(t_raw raw)
+	{
+		t_data data;
+		return data;
+	}
+
+	t_raw convert(t_data token)
+	{
+		t_raw raw;
+		return raw;
+	}
+};
+
+template <>
+class t_convert<t_token> : public t_convert_base {
 public:
 	t_token convert(t_raw raw)
 	{
@@ -83,7 +100,8 @@ public:
 	}
 };
 
-class t_convert_dict : public t_convert {
+template <>
+class t_convert<t_dict> : public t_convert_base {
 public:
 	t_dict convert(t_raw raw)
 	{
