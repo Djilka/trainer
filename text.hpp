@@ -1,5 +1,8 @@
+#include "vocabulary.hpp"
 
 class t_text: public t_command_base {
+	t_vocabulary voc;
+
 	static
 	void view()
 	{
@@ -39,6 +42,7 @@ class t_text: public t_command_base {
 	void setting()
 	{
 		cout << "setting:\n";
+		// TODO finish settings
 
 	}
 public:

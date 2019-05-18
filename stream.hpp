@@ -5,6 +5,7 @@ template <class t_data>
 class t_stream {
 	typedef vector<t_data> tv_data;
 public:
+	static
 	tv_data read(t_string name)
 	{
 		tv_data d;
@@ -20,6 +21,7 @@ public:
 		return d;
 	}
 
+	static
 	void write(t_string name, tv_data d)
 	{
 		t_file file(name);

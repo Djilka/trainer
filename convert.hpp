@@ -13,6 +13,7 @@ struct t_raw {
 class t_convert_base {
 public:
 	template <typename t_type>
+	static
 	void write(t_raw &raw, t_type val)
 	{
 		assert(raw.size - raw.len >= sizeof(t_type));
@@ -20,6 +21,7 @@ public:
 		raw.len += sizeof(t_type);
 	}
 
+	static
 	void write(t_raw &raw, t_string val)
 	{
 		write(raw, val.size());
@@ -28,6 +30,7 @@ public:
 		raw.len += val.size();
 	}
 
+	static
 	void write(t_raw &raw, t_strings val)
 	{
 		write(raw, val.size());
@@ -36,6 +39,7 @@ public:
 	}
 public:
 	template <typename t_type>
+	static
 	void read(t_raw raw, t_type &val)
 	{
 		assert(raw.len >= sizeof(t_type));
@@ -43,6 +47,7 @@ public:
 		memcpy(&val, &raw.ptr[raw.len], sizeof(t_type));
 	}
 
+	static
 	void read(t_raw raw, t_string &val)
 	{
 		size_t size = 0;
@@ -52,6 +57,7 @@ public:
 		val = t_string(&raw.ptr[raw.len], size);
 	}
 
+	static
 	void read(t_raw raw, t_strings &val)
 	{
 		size_t size = 0;
@@ -67,12 +73,14 @@ public:
 template <class t_data>
 class t_convert : public t_convert_base {
 public:
+	static
 	t_data convert(t_raw raw)
 	{
 		t_data data;
 		return data;
 	}
 
+	static
 	t_raw convert(t_data token)
 	{
 		t_raw raw;
@@ -83,6 +91,7 @@ public:
 template <>
 class t_convert<t_token> : public t_convert_base {
 public:
+	static
 	t_token convert(t_raw raw)
 	{
 		t_token token;
@@ -91,6 +100,7 @@ public:
 		return token;
 	}
 
+	static
 	t_raw convert(t_token token)
 	{
 		t_raw raw;
@@ -103,6 +113,7 @@ public:
 template <>
 class t_convert<t_dict> : public t_convert_base {
 public:
+	static
 	t_dict convert(t_raw raw)
 	{
 		t_dict dict;
@@ -126,6 +137,7 @@ public:
 		return dict;
 	}
 
+	static
 	t_raw convert(t_dict dict)
 	{
 		t_raw raw;
