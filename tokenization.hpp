@@ -1,7 +1,6 @@
 #include "file.hpp"
 
 class t_tokenization : public t_file {
-	typedef map<t_string, t_count> tm_token;
 	typedef vector<t_token> tv_token;
 
 	tm_token m_token;
@@ -42,6 +41,7 @@ public:
 			m_token[word]++;
 	}
 
+// TODO : does it need?
 	tv_token vtoken()
 	{
 		tv_token v_token;
