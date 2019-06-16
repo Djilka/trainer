@@ -90,6 +90,8 @@ void t_vector<t_string>::print(t_string temp)
 
 // typedef t_vector<t_string> t_strings;
 typedef vector<t_string> t_strings;
+typedef unsigned int t_count;
+typedef map<t_string, t_count> tm_token;
 
 void print(t_strings data, t_string temp)
 {
