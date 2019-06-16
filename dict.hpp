@@ -7,10 +7,17 @@ struct t_item {
 	t_strings syn;
 	t_strings tr;
 
+	void print(t_strings data, t_string temp)
+	{
+		cout << temp << typeid(data).name() << ": size = " << data.size() << "\n";
+		for (auto it : data)
+			cout << temp << "\t" << it << "\n";
+	}
+
 	void print()
 	{
-		syn.print("\t\t");
-		tr.print("\t\t");
+		print(syn, "\t\t");
+		print(tr, "\t\t");
 	}
 
 	bool operator==(const t_item& val)

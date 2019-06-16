@@ -42,44 +42,16 @@ public:
 		return fs.is_open() && fs.good() && !fs.eof();
 	}
 
-	void write(t_string &data)
+	template <class t_type>
+	void write(t_type &data)
 	{
-		size_t len = data.length();
-		write(len);
-		fs.write(data.c_str(), sizeof(char) * (len));
+		fs.write((char*) &data, sizeof(t_type));
 	}
 
-	void read(t_string &data)
+	template <class t_type>
+	void read(t_type &data)
 	{
-		size_t len = 0;
-		read(len);
-		if (is_OK())
-			for (int i = 0; i < len; i++)
-				data += fs.get();
-	}
-
-	template <typename TYPE>
-	void write(TYPE &data)
-	{
-		fs.write((char*) &data, sizeof(TYPE));
-	}
-
-	template <class TYPE>
-	void read(TYPE &data)
-	{
-		fs.read((char*) &data, sizeof(TYPE));
-	}
-
-	t_string line()
-	{
-		t_string str;
-		getline(fs, str);
-		return str;
-	}
-
-	void line(t_string str)
-	{
-		fs.write(str.c_str(), str.length());
+		fs.read((char*) &data, sizeof(t_type));
 	}
 
 	void read(char *data, size_t size)
@@ -90,5 +62,10 @@ public:
 	void write(char *data, size_t size)
 	{
 		fs.write(data, size);
+	}
+
+	void pos(int delta)
+	{
+		fs.seekg(delta, fs.cur);
 	}
 };

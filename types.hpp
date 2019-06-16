@@ -88,4 +88,12 @@ void t_vector<t_string>::print(t_string temp)
 		cout << temp << "\t" << data[i] << "\n";
 }
 
-typedef t_vector<t_string> t_strings;
+// typedef t_vector<t_string> t_strings;
+typedef vector<t_string> t_strings;
+
+void print(t_strings data, t_string temp)
+{
+	cout << temp << typeid(data).name() << ": size = " << data.size() << "\n";
+	for (int i = 0; i < data.size(); i++)
+		cout << temp << "\t" << data[i] << "\n";
+}

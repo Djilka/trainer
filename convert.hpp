@@ -5,8 +5,8 @@
 #include "dict.hpp"
 
 struct t_raw {
-	unsigned int size = 1024;
-	unsigned int len = 0;
+	size_t size = 1024;
+	size_t len = 0;
 	char ptr[1024];
 };
 
