@@ -20,3 +20,11 @@ struct t_token {
 		return v1.count > v2.count;
 	}
 };
+
+t_strings token_names(tm_token tokens)
+{
+	t_strings names;
+	for (tm_token::iterator it = tokens.begin(); it != tokens.end(); it++)
+		names.push_back(it->first);
+	return names;
+}

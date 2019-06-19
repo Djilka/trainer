@@ -76,15 +76,13 @@ public:
 	static
 	t_data convert(t_raw raw)
 	{
-		t_data data;
-		return data;
+		return t_data();
 	}
 
 	static
 	t_raw convert(t_data token)
 	{
-		t_raw raw;
-		return raw;
+		return t_raw();
 	}
 };
 

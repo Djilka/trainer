@@ -6,6 +6,7 @@ protected:
 	typedef vector<t_dict> t_dicts;
 
 	t_tokens m_tokens;
+	tm_token m_token;
 	t_dicts m_dicts;
 	t_string m_path;
 public:
@@ -32,6 +33,11 @@ public:
 	void tokens(t_tokens new_tokens)
 	{
 		m_tokens = new_tokens;
+	}
+
+	void tokens(tm_token token)
+	{
+		m_token = token;
 	}
 
 	t_tokens tokens()
