@@ -1,4 +1,5 @@
 #include "vocabulary.hpp"
+#include "translation.hpp"
 
 class t_text: public t_command_base {
 	t_vocabulary voc;
