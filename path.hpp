@@ -3,7 +3,7 @@
 namespace fs = std::experimental::filesystem;
 
 class t_path_base {
-protected:
+public:
 	t_strings names(t_string dir_path)
 	{
 		t_strings name;
