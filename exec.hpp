@@ -11,7 +11,8 @@ public:
 		t_string cmd = "/usr/bin/wget";
 		dir += "/" + name;
 		t_string html = website + name;
-		char *argv[] = {(char*)cmd.c_str(),"-O", (char*)dir.c_str(), (char*)html.c_str(), NULL};
+		char *argv[] = {(char*)cmd.c_str(),"--no-check-certificate","-O", 
+						(char*)dir.c_str(), (char*)html.c_str(), NULL};
 		int pid;
 		int stat_loc;
 		pid = fork();

@@ -69,3 +69,5 @@ struct t_dict {
 		return word == val.word && fl;
 	}
 };
+
+typedef vector<t_dict> t_dicts;

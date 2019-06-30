@@ -3,7 +3,6 @@
 class t_vocabulary_base {
 protected:
 	typedef vector<t_token> t_tokens;
-	typedef vector<t_dict> t_dicts;
 
 	t_tokens m_tokens;
 	tm_token m_token;
@@ -28,6 +27,12 @@ public:
 	t_dicts dicts()
 	{
 		return m_dicts;
+	}
+
+	void add(t_dicts new_dicts)
+	{
+		for (t_dict d : new_dicts)
+			m_dicts.push_back(d);
 	}
 
 	void tokens(t_tokens new_tokens)

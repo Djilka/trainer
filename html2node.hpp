@@ -2,7 +2,7 @@
 
 class t_html2node
 {
-	t_file_html *file_html = nullptr;
+	t_html_file *html_file = nullptr;
 	t_node res;
 
 	bool is_close(t_string str)
@@ -13,8 +13,8 @@ class t_html2node
 	t_node into(t_data &d)
 	{
 		t_node node(d.str);
-		for (; file_html->is_OK();) {
-			d = file_html->read();
+		for (; html_file->is_OK();) {
+			d = html_file->read();
 			if (d.msg)
 				node.msg = d.str;
 			else if (is_close(d.str))
@@ -25,18 +25,18 @@ class t_html2node
 		return node;
 	}
 public:
-	t_html2node(t_file_html *file)
+	t_html2node(t_html_file *file)
 	{
-		file_html = file;
+		html_file = file;
 	}
 
 	bool load(t_string name_class)
 	{
-		t_data d = file_html->read();
+		t_data d = html_file->read();
 		bool is_load = d.find(name_class) != string::npos;
 		if (is_load)
 			res = into(d);
-		return is_load && file_html->is_OK();
+		return is_load && html_file->is_OK();
 	}
 
 	t_node get()
