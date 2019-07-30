@@ -1,5 +1,3 @@
-typedef unsigned int t_count;
-
 struct t_token {
 	t_string word;
 	t_count	count = 0;
@@ -14,10 +12,9 @@ struct t_token {
 		return word == val.word;
 	}
 
-	static
-	bool cmp(t_token v1, t_token v2)
+	bool operator>(const t_token &v)
 	{
-		return v1.count > v2.count;
+		return count > v.count;
 	}
 };
 

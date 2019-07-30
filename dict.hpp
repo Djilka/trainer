@@ -1,8 +1,5 @@
 #include <ctime>
 
-typedef unsigned char t_mean;
-typedef unsigned int t_count;
-
 struct t_item {
 	t_strings syn;
 	t_strings tr;
@@ -69,5 +66,3 @@ struct t_dict {
 		return word == val.word && fl;
 	}
 };
-
-typedef vector<t_dict> t_dicts;
