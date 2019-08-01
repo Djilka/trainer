@@ -92,7 +92,7 @@ public:
 			t_html2node node(html_file);
 			for (; node.load("dictionary-item");) {
 				t_dict dh = nodes(node.get());
-				dh.print();
+				cout << dh << "\n";
 				d.push_back(dh);
 			}
 		}

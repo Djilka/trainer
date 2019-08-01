@@ -91,9 +91,11 @@ void t_vector<t_string>::print(t_string temp)
 // typedef t_vector<t_string> t_strings;
 typedef vector<t_string> t_strings;
 
+struct t_token;
 typedef unsigned char t_mean;
 typedef unsigned int t_count;
 typedef map<t_string, t_count> tm_token;
+typedef vector<t_token> t_tokens;
 
 struct t_dict;
 typedef vector<t_dict> t_dicts;
@@ -101,6 +103,25 @@ typedef t_dict *tp_dict;
 typedef vector<tp_dict> tp_dicts;
 typedef tp_dicts::iterator tpi_dicts;
 typedef tp_dicts t_scores[100];
+
+template <class T>
+ostream& operator<<(ostream &stream, vector<T> v)
+{
+	stream << typeid(T).name() << ": size = " << v.size() << "\n";
+	for (T t : v)
+		stream << t << " ";
+	stream << "\n";
+	return stream;
+}
+
+template <class T>
+istream& operator>>(istream &stream, vector<T> v)
+{
+	T t;
+	stream >> t;
+	v.push_back(t);
+	return stream;
+}
 
 void print(t_strings data, t_string temp)
 {

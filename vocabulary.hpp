@@ -2,9 +2,6 @@
 
 class t_vocabulary_base {
 protected:
-	typedef vector<t_token> t_tokens;
-
-	t_tokens m_tokens;
 	tm_token m_token;
 	t_dicts m_dicts;
 	t_string m_path;
@@ -29,25 +26,26 @@ public:
 		return m_dicts;
 	}
 
+	void tokens(tm_token token)
+	{
+		m_token = token;
+	}
+
+	tm_token tokens()
+	{
+		return m_token;
+	}
+
 	void add(t_dicts new_dicts)
 	{
 		for (t_dict d : new_dicts)
 			m_dicts.push_back(d);
 	}
 
-	void tokens(t_tokens new_tokens)
+	void add(tm_token tokens)
 	{
-		m_tokens = new_tokens;
-	}
-
-	void tokens(tm_token token)
-	{
-		m_token = token;
-	}
-
-	t_tokens tokens()
-	{
-		return m_tokens;
+		for (tm_token::iterator t = tokens.begin(); t != tokens.end(); t++)
+			m_token[t->first] += t->second;
 	}
 };
 
@@ -57,13 +55,13 @@ public:
 	
 	void load()
 	{
-		m_tokens = t_stream<t_token>::read(m_path);
+		m_token = token_convert(t_stream<t_token>::read(m_path));
 		m_dicts = t_stream<t_dict>::read(m_path);
 	}
 
 	void save()
 	{
-		t_stream<t_token>::write(m_path, m_tokens);
+		t_stream<t_token>::write(m_path, token_convert(m_token));
 		t_stream<t_dict>::write(m_path, m_dicts);
 	}
 

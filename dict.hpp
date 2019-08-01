@@ -4,24 +4,40 @@ struct t_item {
 	t_strings syn;
 	t_strings tr;
 
-	void print(t_strings data, t_string temp)
-	{
-		cout << temp << typeid(data).name() << ": size = " << data.size() << "\n";
-		for (auto it : data)
-			cout << temp << "\t" << it << "\n";
-	}
-
-	void print()
-	{
-		print(syn, "\t\t");
-		print(tr, "\t\t");
-	}
-
 	bool operator==(const t_item& val)
 	{
 		return syn == val.syn && tr == val.tr;
 	}
+
+	friend ostream& operator<<(ostream &stream, t_item item);
+	friend istream& operator>>(istream &stream, t_item item);
 };
+
+ostream& operator<<(ostream &stream, t_item item)
+{
+	stream << item.syn;
+	stream << item.tr;
+	return stream;
+}
+
+istream& operator>>(istream &stream, t_item item)
+{
+	t_string str;
+	int count = 0;
+
+	stream >> count;
+	for (int i = 0; i < count; i++) {
+		stream >> str;
+		item.syn.push_back(str);
+	}
+
+	stream >> count;
+	for (int i = 0; i < count; i++) {
+		stream >> str;
+		item.tr.push_back(str);
+	}
+	return stream;
+}
 
 struct t_dict {
 	typedef vector<t_item> t_items;
@@ -44,20 +60,6 @@ struct t_dict {
 		time_cur = (nullptr != p_time_curr)? *p_time_curr : tm();
 	}
 
-	void print()
-	{
-		cout << "print dict:\n";
-		cout << "\tmean: " << (int)mean << "\n";
-		cout << "\tcount: " << count << "\n";
-		cout << "\tword: " << word << "\n";
-		cout << "\ttrans: " << trans << "\n";
-		cout << "\ttype: " << type << "\n";
-
-		cout << typeid(items).name() << ": size = " << items.size() << "\n";
-		for (auto it : items)
-			it.print();
-	}
-
 	bool operator==(const t_dict& val)
 	{
 		bool fl = items.size() == val.items.size();
@@ -65,4 +67,41 @@ struct t_dict {
 			fl = items[i] == val.items[i];
 		return word == val.word && fl;
 	}
+
+	friend ostream& operator<<(ostream &stream, t_dict dict);
+	friend istream& operator>>(istream &stream, t_dict dict);
 };
+
+ostream& operator<<(ostream &stream, t_dict dict)
+{
+	stream << "dict:\n";
+	stream << "\tmean: " << (int)dict.mean << "\n";
+	stream << "\tcount: " << dict.count << "\n";
+	stream << "\tword: " << dict.word << "\n";
+	stream << "\ttrans: " << dict.trans << "\n";
+	stream << "\ttype: " << dict.type << "\n";
+	stream << typeid(dict.items).name() << ": size = " << dict.items.size() << "\n";
+	for (t_item item : dict.items)
+		stream << item << "\n";
+	stream << "\n";
+
+	return stream;
+}
+
+istream& operator>>(istream &stream, t_dict dict)
+{
+	stream >> dict.mean;
+	stream >> dict.count;
+	stream >> dict.word;
+	stream >> dict.trans;
+	stream >> dict.type;
+
+	int count = 0;
+	stream >> count;
+	t_item item;
+	for (int i = 0; i < count; i++) {
+		stream >> item;
+		dict.items.push_back(item);
+	}
+	return stream;
+}
