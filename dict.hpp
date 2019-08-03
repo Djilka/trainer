@@ -42,7 +42,7 @@ struct t_dict {
 	t_string trans;
 	t_string type;
 	t_items items;
-	t_mean mean;
+	t_count pass;
 	t_count count;
 	tm time_cur;
 
@@ -51,9 +51,15 @@ struct t_dict {
 		time_t t = time(0);
 		tm* p_time_curr = localtime(&t);
 
-		mean = 0;
+		pass = 0;
 		count = 0;
 		time_cur = (nullptr != p_time_curr)? *p_time_curr : tm();
+	}
+
+	void update(bool result)
+	{
+		count++;
+		pass += result;
 	}
 
 	bool operator==(const t_dict& val)
@@ -67,7 +73,7 @@ struct t_dict {
 	void print(ostream &stream)
 	{
 		stream << "dict:\n";
-		stream << "\tmean: " << (int)mean << "\n";
+		stream << "\tpass: " << (int)pass << "\n";
 		stream << "\tcount: " << count << "\n";
 		stream << "\tword: " << word << "\n";
 		stream << "\ttrans: " << trans << "\n";
@@ -83,7 +89,7 @@ struct t_dict {
 
 ostream& operator<<(ostream &stream, t_dict dict)
 {
-	stream << dict.mean;
+	stream << dict.pass;
 	stream << dict.count;
 	stream << dict.word;
 	stream << dict.trans;
@@ -94,7 +100,7 @@ ostream& operator<<(ostream &stream, t_dict dict)
 
 istream& operator>>(istream &stream, t_dict &dict)
 {
-	stream >> dict.mean;
+	stream >> dict.pass;
 	stream >> dict.count;
 	stream >> dict.word;
 	stream >> dict.trans;

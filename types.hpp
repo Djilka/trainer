@@ -23,7 +23,8 @@ typedef vector<t_dict> t_dicts;
 typedef t_dict *tp_dict;
 typedef vector<tp_dict> tp_dicts;
 typedef tp_dicts::iterator tpi_dicts;
-typedef tp_dicts t_scores[100];
+const t_count max_score = 100;
+typedef tp_dicts t_scores[max_score + 1];
 
 template <class T>
 ostream& operator<<(ostream &stream, vector<T> v)

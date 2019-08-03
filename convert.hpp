@@ -119,7 +119,7 @@ public:
 		read(raw, dict.word);
 		read(raw, dict.trans);
 		read(raw, dict.type);
-		read(raw, dict.mean);
+		read(raw, dict.pass);
 		read(raw, dict.count);
 		read(raw, dict.time_cur);
 		// items
@@ -143,7 +143,7 @@ public:
 		write(raw, dict.word);
 		write(raw, dict.trans);
 		write(raw, dict.type);
-		write(raw, dict.mean);
+		write(raw, dict.pass);
 		write(raw, dict.count);
 		write(raw, dict.time_cur);
 		// items
