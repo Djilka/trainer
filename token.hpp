@@ -2,11 +2,6 @@ struct t_token {
 	t_string word;
 	t_count	count = 0;
 
-	void print()
-	{
-		cout << word << ":" << count << '\n';
-	}
-
 	bool operator==(const t_token& val)
 	{
 		return word == val.word;
@@ -16,7 +11,39 @@ struct t_token {
 	{
 		return count > v.count;
 	}
+
+	void print(ostream &stream)
+	{
+		stream << "token:\n";
+		stream << word  << " : " << count << "\n";
+	}
+
+	friend ostream& operator<<(ostream &stream, t_token token);
+	friend istream& operator>>(istream &stream, t_token &token);
 };
+
+ostream& operator<<(ostream &stream, t_token token)
+{
+	stream << token.word;
+	stream << token.count;
+	return stream;
+}
+
+istream& operator>>(istream &stream, t_token &token)
+{
+	stream >> token.word;
+	stream >> token.count;
+	return stream;
+}
+
+template <>
+void print<t_token>(ostream &stream, vector<t_token> v)
+{
+	stream << typeid(t_token).name() << ": size = " << v.size() << "\n";
+	for (t_token t : v)
+		t.print(stream);
+	stream << "\n";
+}
 
 t_tokens token_convert(tm_token tokens)
 {

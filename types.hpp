@@ -15,6 +15,7 @@ struct t_token;
 typedef unsigned char t_mean;
 typedef unsigned int t_count;
 typedef map<t_string, t_count> tm_token;
+typedef tm_token::iterator ti_token;
 typedef vector<t_token> t_tokens;
 
 struct t_dict;
@@ -27,20 +28,32 @@ typedef tp_dicts t_scores[100];
 template <class T>
 ostream& operator<<(ostream &stream, vector<T> v)
 {
-	stream << typeid(T).name() << ": size = " << v.size() << "\n";
+	stream << v.size();
 	for (T t : v)
-		stream << t << " ";
-	stream << "\n";
+		stream << t;
 	return stream;
 }
 
 template <class T>
-istream& operator>>(istream &stream, vector<T> v)
+istream& operator>>(istream &stream, vector<T> &v)
 {
 	T t;
-	stream >> t;
-	v.push_back(t);
+	size_t size = 0;
+	stream >> size;
+	for (int i = 0; i < size; i++) {
+		stream >> t;
+		v.push_back(t);
+	}
 	return stream;
+}
+
+template <class T>
+void print(ostream &stream, vector<T> v)
+{
+	stream << typeid(T).name() << ": size = " << v.size() << "\n";
+	for (T t : v)
+		stream << t << " ";
+	stream << "\n";
 }
 
 inline bool find_str(t_string str, t_string sub)
