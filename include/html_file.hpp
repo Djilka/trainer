@@ -1,7 +1,6 @@
 #include "file.hpp"
 
-class t_data
-{
+class t_data {
 	bool is_start(char c)
 	{
 		return c == '<';
@@ -11,7 +10,6 @@ class t_data
 	{
 		return c == '>';
 	}
-
 public:
 	t_string str;
 	bool msg;
@@ -48,11 +46,9 @@ public:
 	}
 };
 
-
-class t_html_file: public t_file
-{
+class t_html_file: public t_file_r {
 public:
-	t_html_file(t_string nm): t_file(nm) {}
+	t_html_file(t_string nm): t_file_r(nm) {}
 
 	t_data read()
 	{

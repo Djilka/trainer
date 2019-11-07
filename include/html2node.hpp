@@ -1,7 +1,6 @@
 #include "node.hpp"
 
-class t_html2node
-{
+class t_html2node {
 	t_html_file *html_file = nullptr;
 	t_node res;
 

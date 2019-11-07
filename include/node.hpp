@@ -1,6 +1,5 @@
 
-class t_node
-{
+class t_node {
 	typedef vector<t_node> t_nodes;
 
 	t_string get_class()

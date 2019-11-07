@@ -1,8 +1,7 @@
 #include "html_file.hpp"
 #include "html2node.hpp"
 
-class t_parser
-{
+class t_parser {
 	t_html_file *html_file = nullptr;
 
 	void title(t_dict &dict, t_node node)
@@ -100,4 +99,3 @@ public:
 		return d;
 	}
 };
-

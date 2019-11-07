@@ -8,21 +8,32 @@
 
 using namespace std;
 
-typedef string t_string;
-typedef vector<t_string> t_strings;
+enum t_type_test {
+	tt_up, tt_down
+};
+
+using t_string = string;
+using t_strings = vector<t_string>;
+using tm_strings = map<char, t_strings>;
 
 struct t_token;
-typedef unsigned char t_mean;
-typedef unsigned int t_count;
-typedef map<t_string, t_count> tm_token;
-typedef tm_token::iterator ti_token;
-typedef vector<t_token> t_tokens;
+using t_mean = unsigned char;
+using t_count = unsigned int;
+using tm_token = map<t_string, t_count>;
+using ti_token = tm_token::iterator;
+using t_tokens = vector<t_token>;
+
+struct t_item;
+using t_items = vector<t_item>;
 
 struct t_dict;
-typedef vector<t_dict> t_dicts;
+using t_dicts = vector<t_dict>;
+using ti_dicts = t_dicts::iterator;
+
 typedef t_dict *tp_dict;
-typedef vector<tp_dict> tp_dicts;
-typedef tp_dicts::iterator tpi_dicts;
+using tp_dicts = vector<tp_dict>;
+using tpi_dicts = tp_dicts::iterator;
+
 const t_count max_score = 100;
 typedef tp_dicts t_scores[max_score + 1];
 

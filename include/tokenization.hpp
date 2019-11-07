@@ -1,6 +1,6 @@
 #include "file.hpp"
 
-class t_tokenization : public t_file {
+class t_tokenization : public t_file_r {
 private:
 	t_string get_word()
 	{
@@ -31,7 +31,7 @@ private:
 		return word;
 	}
 public:
-	t_tokenization(t_string name) : t_file(name) { }
+	t_tokenization(t_string name) : t_file_r(name) { }
 
 	tm_token tokens()
 	{

@@ -16,6 +16,27 @@ public:
 		score[s].push_back(dict);
 	}
 
+	void add(t_dicts &dicts)
+	{
+		for (int i = 0; i < dicts.size(); i++)
+			add(&dicts[i]);
+	}
+
+	void remove()
+	{
+		for (int i = s_min; i <= s_max; i++)
+			score[i].clear();
+	}
+
+	void remove(t_dict d)
+	{
+		for (int i = s_min; i <= s_max; i++) {
+			for (auto it = score[i].begin(); it != score[i].end(); it++)
+				if (*(*it) == d)
+					score[i].erase(it);
+		}
+	}
+
 	void sort_score(tm_token token)
 	{
 		for (int i = s_min; i <= s_max; i++) {
@@ -25,13 +46,6 @@ public:
 					return token[i->word] < token[j->word];
 				});
 		}
-	}
-
-	void init(t_dicts dicts, tm_token token)
-	{
-		for (int i = 0; i < dicts.size(); i++)
-			add(&dicts[i]);
-		sort_score(token);
 	}
 
 	void update(tm_token token)

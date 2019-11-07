@@ -1,4 +1,3 @@
-#include "types.hpp"
 #include "command_base.hpp"
 #include "text.hpp"
 

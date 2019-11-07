@@ -4,6 +4,19 @@ struct t_item {
 	t_strings syn;
 	t_strings tr;
 
+	bool tr_find(t_string word)
+	{
+		for (t_string t : tr)
+			if (t == word)
+				return true;
+		return false;
+	}
+
+	void tr_add(t_string word)
+	{
+		tr.push_back(word);
+	}
+
 	bool operator==(const t_item& val)
 	{
 		return syn == val.syn && tr == val.tr;
@@ -36,8 +49,6 @@ istream& operator>>(istream &stream, t_item &item)
 }
 
 struct t_dict {
-	typedef vector<t_item> t_items;
-
 	t_string word;
 	t_string trans;
 	t_string type;
@@ -47,6 +58,17 @@ struct t_dict {
 	tm time_cur;
 
 	t_dict()
+	{
+		init();
+	}
+
+	t_dict(t_string w)
+	{
+		init();
+		word = w;
+	}
+
+	void init()
 	{
 		time_t t = time(0);
 		tm* p_time_curr = localtime(&t);
@@ -60,6 +82,57 @@ struct t_dict {
 	{
 		count++;
 		pass += result;
+	}
+
+	bool translation_find(t_string tr)
+	{
+		for (t_item it : items)
+			if (it.tr_find(tr))
+				return true;
+		return false;
+	}
+
+	void translation_add(t_string tr)
+	{
+		t_item it;
+		it.tr_add(tr);
+		items.push_back(it);
+	}
+
+	bool check(t_string str, t_type_test t)
+	{
+		switch (t) {
+			case tt_down: {
+				bool is_right = false;
+				for (int i = 0; !is_right && i < items.size(); i++)
+					for (int j = 0; j < items[i].tr.size(); j++)
+						is_right = str == items[i].tr[i];
+				return is_right;
+			}
+			case tt_up:
+				return str == word;
+			default:
+				return false;
+		};
+	}
+
+	t_string get(t_type_test t)
+	{
+		switch (t) {
+			case tt_down:
+				return word;
+			case tt_up: {
+				t_string res;
+				for (int i = 0; i < items.size(); i++) {
+					for (int j = 0; j < items[i].tr.size(); j++)
+						res += items[i].tr[j] + "; ";
+					res += "\n";
+				}
+				return res;
+			}
+			default:
+				return t_string();
+		};
 	}
 
 	bool operator==(const t_dict& val)

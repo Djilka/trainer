@@ -5,8 +5,7 @@ enum t_mode_op {
 	tmo_rd, tmo_wr
 };
 
-class t_file
-{
+class t_file_r {
 protected:
 	fstream fs;
 	typedef streamsize t_len;
@@ -15,14 +14,12 @@ protected:
 
 	t_mode_op mode_op;
 public:
-	t_file(t_string nm)
+	t_file_r(t_string nm)
 	{
 		fs.open(nm, mode);
-		if (!fs.is_open())
-			fs.open(nm, mode | fstream::trunc);
 	}
 
-	~t_file()
+	~t_file_r()
 	{
 		fs.close();
 	}
@@ -42,30 +39,26 @@ public:
 		return fs.is_open() && fs.good() && !fs.eof();
 	}
 
-	template <class t_type>
-	void write(t_type &data)
+	template <class t_data>
+	void write(t_data data)
 	{
-		fs.write((char*) &data, sizeof(t_type));
+		fs << data;
 	}
 
-	template <class t_type>
-	void read(t_type &data)
+	template <class t_data>
+	void read(t_data &data)
 	{
-		fs.read((char*) &data, sizeof(t_type));
-	}
-
-	void read(char *data, size_t size)
-	{
-		fs.read(data, size);
-	}
-
-	void write(char *data, size_t size)
-	{
-		fs.write(data, size);
+		fs >> data;
 	}
 
 	void pos(int delta)
 	{
 		fs.seekg(delta, fs.cur);
 	}
+};
+
+class t_file_w : public t_file_r {
+	static const t_mode mode = fstream::in | fstream::out | fstream::trunc;
+public:
+	t_file_w(t_string nm) : t_file_r(nm) { }
 };
