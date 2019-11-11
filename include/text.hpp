@@ -69,10 +69,39 @@ class t_text: public t_command_base {
 	void text()
 	{
 		cout << "text:\n";
+		cout << "\t1. parse text\n";
+		cout << "\t2. load list's words\n";
+
+		int val = 0;
+		cin >> val;
+
+		cout << "path:\n";
 		t_string path;
 		cin >> path;
 
-		voc.add(t_translation::translate(path));
+		tm_token tokens;
+
+		switch (val) {
+		case 1: {
+			// load text
+			tokens = t_translation::tokens(path);
+		} break;
+		case 2: {
+			// load list's
+			t_strings words;
+			t_file_r file(path);
+			while (file.is_OK()) {
+				t_string word;
+				file.read(word);
+				if (word.size())
+					words.push_back(word);
+			}
+			tokens = token_words(words);
+		} break;
+		default:
+			return;
+		}
+		voc.add(t_translation::translate(voc.unique(tokens)));
 	}
 
 	static

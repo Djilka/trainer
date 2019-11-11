@@ -66,7 +66,7 @@ public:
 
 	void add(tm_token tokens)
 	{
-		for (tm_token::iterator t = tokens.begin(); t != tokens.end(); t++)
+		for (ti_token t = tokens.begin(); t != tokens.end(); t++)
 			m_token[t->first] += t->second;
 	}
 
@@ -85,6 +85,17 @@ public:
 	{
 		cout << "path : " << m_path << "\n";
 		cout << "count words : " << m_token.size() << "\n";
+	}
+
+	tm_token unique(tm_token tm)
+	{
+		tm_token utoken;
+		for (ti_token t = tm.begin(); t != tm.end(); t++)
+			if (m_token.count(t->first))
+				m_token[t->first] += t->second;
+			else
+				utoken[t->first] = t->second;
+		return utoken;
 	}
 };
 

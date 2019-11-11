@@ -23,7 +23,7 @@ public:
 		t_vocabulary voc;
 		voc.path(dir);
 		voc.tokens(tokens);
-		
+
 		t_strings words = token_names(tokens);
 
 		// web
@@ -46,6 +46,13 @@ public:
 	{
 		t_tokenization tok(text);
 		return translate(tok.tokens());
+	}
+
+	static
+	tm_token tokens(t_string text)
+	{
+		t_tokenization tok(text);
+		return tok.tokens();
 	}
 };
 

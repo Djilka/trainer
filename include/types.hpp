@@ -68,6 +68,15 @@ void print(ostream &stream, vector<T> v)
 	stream << "\n";
 }
 
+template <class T1, class T2>
+void print(ostream &stream, map<T1, T2> v)
+{
+	stream << "map\n";
+	for (auto it : v)
+		stream << it.first << " : " << it.second << "\n";
+	stream << "\n";
+}
+
 inline bool find_str(t_string str, t_string sub)
 {
 	return str.find(sub) != t_string::npos;
