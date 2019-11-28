@@ -5,6 +5,8 @@ class t_score {
 
 	t_count check(t_dict *d)
 	{
+		if (!d->count)
+			return s_min;
 		t_count s = d->pass * 100 / d->count;
 		return s < s_min ? s_min : s > s_max ? s_max : s;
 	}
