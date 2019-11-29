@@ -32,4 +32,10 @@ class t_path : public t_path_base {
 public:
 	t_path(){}
 	~t_path(){}
+
+	void free_dir(t_string dir_path)
+	{
+		remove(dir_path);
+		create(dir_path);
+	}
 };

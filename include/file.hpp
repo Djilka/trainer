@@ -1,20 +1,13 @@
 #pragma once
 #include <fstream>
 
-enum t_mode_op {
-	tmo_rd, tmo_wr
-};
-
 class t_file_r {
 protected:
 	fstream fs;
-	typedef streamsize t_len;
-	typedef ios_base::openmode t_mode;
-	static const t_mode mode = fstream::in | fstream::out;
-
-	t_mode_op mode_op;
+	using t_len = streamsize;
+	using t_mode = ios_base::openmode;
 public:
-	t_file_r(t_string nm)
+	t_file_r(t_string nm, t_mode mode = fstream::in | std::ifstream::binary)
 	{
 		fs.open(nm, mode);
 	}
@@ -22,11 +15,6 @@ public:
 	~t_file_r()
 	{
 		fs.close();
-	}
-
-	void set_mode_op(t_mode_op m)
-	{
-		mode_op = m;
 	}
 
 	bool error()
@@ -58,7 +46,6 @@ public:
 };
 
 class t_file_w : public t_file_r {
-	static const t_mode mode = fstream::in | fstream::out | fstream::trunc;
 public:
-	t_file_w(t_string nm) : t_file_r(nm) { }
+	t_file_w(t_string nm) : t_file_r(nm, fstream::out | fstream::trunc) { }
 };

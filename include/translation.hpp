@@ -20,8 +20,11 @@ public:
 	static
 	t_vocabulary translate(tm_token tokens)
 	{
+		// clear dir
+		t_path path;
+		path.free_dir(dir);
+
 		t_vocabulary voc;
-		voc.path(dir);
 		voc.tokens(tokens);
 
 		t_strings words = token_names(tokens);
@@ -37,6 +40,7 @@ public:
 		}
 
 		// clear dir
+		path.free_dir(dir);
 
 		return voc;
 	}

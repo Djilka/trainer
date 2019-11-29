@@ -22,6 +22,15 @@ protected:
 			words[name[0]].push_back(name);
 		return words;
 	}
+
+	tm_dicts split_dicts()
+	{
+		tm_dicts dicts;
+		for (int i = 0; i < m_dicts.size(); i++)
+			if (m_dicts[i].word.size())
+				dicts[m_dicts[i].word[0]].push_back(m_dicts[i]);
+		return dicts;
+	}
 public:
 	void path(t_string new_path)
 	{
@@ -85,6 +94,7 @@ public:
 	{
 		cout << "path : " << m_path << "\n";
 		cout << "count words : " << m_token.size() << "\n";
+		cout << "dict size = " << m_dicts.size() << "\n";
 	}
 
 	tm_token unique(tm_token tm)
@@ -165,8 +175,9 @@ public:
 		t_path path;
 		t_strings names = path.names(m_path);
 		for (t_string name : names) {
-			t_string name_file = m_path + name;
+			t_string name_file = m_path + "/" + name;
 			if (find_str(name, ext_dict)) {
+				cout << "load dict: " << name << "\n";
 				t_stream::read(name_file, m_dicts);
 			} else if (find_str(name, ext_token)) {
 				t_stream::read(name_file, m_token);
@@ -177,16 +188,12 @@ public:
 
 	void save()
 	{
-		t_path path;
-		t_strings names = path.names(m_path);
-
 		// tokens
-		t_tokens tokens = token_convert(m_token);
-		t_stream::write(m_path + ext_token, tokens);
+		t_stream::write(m_path + "/" + ext_token, m_token);
 
 		// dicts
-		tm_strings words = split_words();
-		for (auto it = words.begin(); it != words.end(); it++)
-			t_stream::write(m_path + it->first + ext_dict, it->second);
+		tm_dicts dicts = split_dicts();
+		for (auto it = dicts.begin(); it != dicts.end(); it++)
+			t_stream::write(m_path + "/" + it->first + ext_dict, it->second);
 	}
 };

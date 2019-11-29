@@ -3,7 +3,7 @@ struct t_token {
 	t_string word;
 	t_count	count = 0;
 
-	t_token(t_string str, t_count c) : count{0}, word{str} {}
+	t_token(t_string str, t_count c) : count{c}, word{str} {}
 	t_token() : count{0} {}
 
 	bool operator==(const t_token& val)
@@ -28,8 +28,7 @@ struct t_token {
 
 ostream& operator<<(ostream &stream, t_token token)
 {
-	stream << token.word;
-	stream << token.count;
+	stream << token.word << " " << token.count;
 	return stream;
 }
 

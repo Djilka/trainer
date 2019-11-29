@@ -43,11 +43,14 @@ class t_text: public t_command_base {
 		cout << "\t3. remove\n";
 		cout << "\t4. info\n";
 
-		t_string word;
-		t_string tr;
-		cin >> word;
 		int val = 0;
 		cin >> val;
+
+		t_string word;
+		cout << "word:\n";
+		cin >> word;
+
+		t_string tr;
 		switch (val) {
 		case 1:
 			voc.add(t_translation::translate({word}));

@@ -1,4 +1,3 @@
-#include <ctime>
 
 struct t_item {
 	t_strings syn;
@@ -53,7 +52,8 @@ struct t_dict {
 	t_string trans;
 	t_string type;
 	t_items items;
-	t_count pass;
+	// t_count pass;
+	t_mean pass;
 	t_count count;
 	tm time_cur;
 
@@ -162,12 +162,13 @@ struct t_dict {
 
 ostream& operator<<(ostream &stream, t_dict dict)
 {
-	stream << dict.pass;
-	stream << dict.count;
-	stream << dict.word;
-	stream << dict.trans;
-	stream << dict.type;
-	stream << dict.items;
+	stream << dict.pass << "\n";
+	stream << dict.count << "\n";
+	stream << dict.time_cur << "\n";
+	str_write(stream, dict.word);
+	str_write(stream, dict.trans);
+	str_write(stream, dict.type);
+	stream << dict.items << "\n";
 	return stream;
 }
 
@@ -175,9 +176,10 @@ istream& operator>>(istream &stream, t_dict &dict)
 {
 	stream >> dict.pass;
 	stream >> dict.count;
-	stream >> dict.word;
-	stream >> dict.trans;
-	stream >> dict.type;
+	stream >> dict.time_cur;
+	str_read(stream, dict.word);
+	str_read(stream, dict.trans);
+	str_read(stream, dict.type);
 	stream >> dict.items;
 	return stream;
 }

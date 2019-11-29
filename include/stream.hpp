@@ -37,8 +37,7 @@ public:
 	{
 		t_file_w file(name);
 		for (t_data data : d)
-			if (file.is_OK())
-				file.write(data);
+			file.write(data);
 	}
 
 	// tm_token
