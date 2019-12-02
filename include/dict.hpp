@@ -23,8 +23,9 @@ struct t_item {
 
 	void print(ostream &stream)
 	{
-		stream << "item:\n";
+		stream << "synonym:\n";
 		::print(stream, syn);
+		stream << "translation:\n";
 		::print(stream, tr);
 		stream << "\n";
 	}
@@ -182,13 +183,4 @@ istream& operator>>(istream &stream, t_dict &dict)
 	str_read(stream, dict.type);
 	stream >> dict.items;
 	return stream;
-}
-
-template <>
-void print<t_dict>(ostream &stream, vector<t_dict> v)
-{
-	stream << typeid(t_dict).name() << ": size = " << v.size() << "\n";
-	for (t_dict t : v)
-		t.print(stream);
-	stream << "\n";
 }

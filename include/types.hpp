@@ -133,9 +133,9 @@ istream& operator>>(istream &stream, tm &v)
 template <class T>
 void print(ostream &stream, vector<T> v)
 {
-	stream << typeid(T).name() << ": size = " << v.size() << "\n";
+	stream << "size = " << v.size() << "\n";
 	for (T t : v)
-		stream << t << " ";
+		stream << t << "; ";
 	stream << "\n";
 }
 

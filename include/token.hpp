@@ -39,15 +39,6 @@ istream& operator>>(istream &stream, t_token &token)
 	return stream;
 }
 
-template <>
-void print<t_token>(ostream &stream, vector<t_token> v)
-{
-	stream << typeid(t_token).name() << ": size = " << v.size() << "\n";
-	for (t_token t : v)
-		t.print(stream);
-	stream << "\n";
-}
-
 t_tokens token_convert(tm_token tokens)
 {
 	t_tokens c_tokens;
