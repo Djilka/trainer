@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <set>
 #include <ctime>
 
 using namespace std;
@@ -40,7 +41,11 @@ using tpi_dicts = tp_dicts::iterator;
 using tmp_dicts = map<char, tp_dicts>;
 
 const t_count max_score = 100;
+const t_count max_try = 250;
+const t_count s_bad = max_try + 1;
 typedef tp_dicts t_scores[max_score + 1];
+
+using t_set = set<t_string>;
 
 template <class T>
 ostream& operator<<(ostream &stream, vector<T> v)

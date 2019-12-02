@@ -154,17 +154,21 @@ public:
 
 class t_vocabulary_train : public t_vocabulary_word {
 	t_pool pool;
+	void train_run(t_type_test t, tp_dicts p_dicts)
+	{
+		pool.test_type(t);
+		pool.test(p_dicts);
+		score.update(m_token);
+	}
 public:
 	void train(t_count count, t_type_test t)
 	{
-		pool.test_type(t);
-		pool.test(score.train(count));
+		train_run(t, score.train(count));
 	}
 
 	void learn(t_count count, t_type_test t)
 	{
-		pool.test_type(t);
-		pool.test(score.learn(count));
+		train_run(t, score.learn(count));
 	}
 };
 
